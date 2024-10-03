@@ -1,0 +1,23 @@
+<h1>Estos son los productos creados hasta el momento.</h1>
+
+{{#each arrayOfProducts.payload}}
+    <div>
+        <h3>Producto: {{this.title}}</h3>
+        <p>Descripcion: {{this.description}}</p>
+        <p>Precio: {{this.price}}</p>
+        <p>Categoria: {{this.category}}</p>
+    </div>
+    <button>Agregar al carrito</button>
+    <br>
+    <br>
+{{/each}}
+
+{{#if arrayOfProducts.hasPrevPage}}
+    <a href="/products?page={{arrayOfProducts.prevPage}}">Anterior</a>
+{{/if}}
+
+{{#if arrayOfProducts.hasNextPage}}
+    <a href="/products?page={{arrayOfProducts.nextPage}}">Siguiente</a>
+{{/if}}
+<br>
+<p>Estamos en la página {{arrayOfProducts.page}} de {{arrayOfProducts.totalPages}}</p>
