@@ -2,10 +2,14 @@ import Express from "express";
 import productRouter from "./routes/product.routes.js";
 import cartsRouter from "./routes/cart.routes.js";
 import viewsRouter from "./routes/views.routes.js";
+import userRouter from "./routes/user.routes.js";
 import exphbs from "express-handlebars";
 import { Server } from "socket.io";
 import { productManager } from "./routes/product.routes.js";
 import "./database.js"
+import cookieParser from "cookie-parser";
+import passport from "passport";
+import initializePassport from "./Config/config.js";
 
 const app = Express();
 const PUERTO = 8080;
@@ -14,6 +18,9 @@ const PUERTO = 8080;
 app.use(Express.json());
 app.use(Express.urlencoded({extended: true}));
 app.use(Express.static("./src/Public"));
+app.use(cookieParser());
+app.use(passport.initialize());
+initializePassport();
 
 //Configuracion de Handlebars
 app.engine("handlebars", exphbs.engine());
@@ -22,6 +29,7 @@ app.set("views", "./src/views");
 
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartsRouter);
+app.use("/api/sessions", userRouter)
 app.use("/", viewsRouter);
 
 const httpServer = app.listen(PUERTO,() => {

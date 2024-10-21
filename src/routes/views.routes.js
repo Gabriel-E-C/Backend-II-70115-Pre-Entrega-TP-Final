@@ -4,6 +4,21 @@ import ProductsModel from "../DAO/models/product.model.js"
 
 const router= Router ();
 
+router.get ("/login", (req, res) => {
+    try {
+        res.render("login");
+    } catch (error) {
+        res.status(500).send(`Hubo un error en el servidor al ir al Login`, error)
+    }
+})
+
+router.get ("/register", (req, res) => {
+    try {
+        res.render("register");
+    } catch (error) {
+        res.status(500).send(`Hubo un error en el servidor al ir al Login`, error)
+    }
+})
 
 router.get("/products", async (req, res) => {
     try {
